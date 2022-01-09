@@ -113,51 +113,51 @@ RUN \
     cd ..; rm -rf geos
 
 # szip (for hdf)
-RUN \
-    mkdir szip; \
-    wget -qO- https://support.hdfgroup.org/ftp/lib-external/szip/$SZIP_VERSION/src/szip-$SZIP_VERSION.tar.gz | tar xvz -C szip --strip-components=1; cd szip; \
-    ./configure --prefix=$PREFIX; \
-    make -j ${NPROC} install; \
-    cd ..; rm -rf szip
+# RUN \
+#     mkdir szip; \
+#     wget -qO- https://support.hdfgroup.org/ftp/lib-external/szip/$SZIP_VERSION/src/szip-$SZIP_VERSION.tar.gz | tar xvz -C szip --strip-components=1; cd szip; \
+#     ./configure --prefix=$PREFIX; \
+#     make -j ${NPROC} install; \
+#     cd ..; rm -rf szip
 
 # libhdf4
-RUN \
-    mkdir hdf4; \
-    wget -qO- https://support.hdfgroup.org/ftp/HDF/releases/HDF$HDF4_VERSION/src/hdf-$HDF4_VERSION.tar | tar xv -C hdf4 --strip-components=1; cd hdf4; \
-    ./configure \
-        --prefix=$PREFIX \
-        --with-szlib=$PREFIX \
-        --enable-shared \
-        --disable-netcdf \
-        --disable-fortran; \
-    make -j ${NPROC} install; \
-    cd ..; rm -rf hdf4
+# RUN \
+#     mkdir hdf4; \
+#     wget -qO- https://support.hdfgroup.org/ftp/HDF/releases/HDF$HDF4_VERSION/src/hdf-$HDF4_VERSION.tar | tar xv -C hdf4 --strip-components=1; cd hdf4; \
+#     ./configure \
+#         --prefix=$PREFIX \
+#         --with-szlib=$PREFIX \
+#         --enable-shared \
+#         --disable-netcdf \
+#         --disable-fortran; \
+#     make -j ${NPROC} install; \
+#     cd ..; rm -rf hdf4
 
 # libhdf5
-RUN \
-    mkdir hdf5; \
-    wget -qO- https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_VERSION%.*}/hdf5-${HDF5_VERSION}/src/hdf5-$HDF5_VERSION.tar.gz | tar xvz -C hdf5 --strip-components=1; cd hdf5; \
-    ./configure \
-        --prefix=$PREFIX \
-        --with-szlib=$PREFIX; \
-    make -j ${NPROC} install; \
-    cd ..; rm -rf hdf5
+# RUN \
+#     mkdir hdf5; \
+#     wget -qO- https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_VERSION%.*}/hdf5-${HDF5_VERSION}/src/hdf5-$HDF5_VERSION.tar.gz | tar xvz -C hdf5 --strip-components=1; cd hdf5; \
+#     ./configure \
+#         --prefix=$PREFIX \
+#         --with-szlib=$PREFIX; \
+#     make -j ${NPROC} install; \
+#     cd ..; rm -rf hdf5
 
 # NetCDF
-RUN \
-    mkdir netcdf; \
-    wget -qO- https://github.com/Unidata/netcdf-c/archive/v$NETCDF_VERSION.tar.gz | tar xvz -C netcdf --strip-components=1; cd netcdf; \
-    ./configure --prefix=$PREFIX --enable-hdf4; \
-    make -j ${NPROC} install; \
-    cd ..; rm -rf netcdf
+# RUN \
+#     mkdir netcdf; \
+#     wget -qO- https://github.com/Unidata/netcdf-c/archive/v$NETCDF_VERSION.tar.gz | tar xvz -C netcdf --strip-components=1; cd netcdf; \
+#     ./configure --prefix=$PREFIX --enable-hdf4; \
+#     make -j ${NPROC} install; \
+#     cd ..; rm -rf netcdf
 
 # WEBP
-RUN \
-    mkdir webp; \
-    wget -qO- https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-${WEBP_VERSION}.tar.gz | tar xvz -C webp --strip-components=1; cd webp; \
-    CFLAGS="-O2 -Wl,-S" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" ./configure --prefix=$PREFIX; \
-    make -j ${NPROC} install; \
-    cd ..; rm -rf webp
+# RUN \
+#     mkdir webp; \
+#     wget -qO- https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-${WEBP_VERSION}.tar.gz | tar xvz -C webp --strip-components=1; cd webp; \
+#     CFLAGS="-O2 -Wl,-S" PKG_CONFIG_PATH="/usr/lib64/pkgconfig" ./configure --prefix=$PREFIX; \
+#     make -j ${NPROC} install; \
+#     cd ..; rm -rf webp
 
 # ZSTD
 RUN \
@@ -167,20 +167,20 @@ RUN \
     cd ..; rm -rf zstd
 
 # openjpeg
-RUN \
-    mkdir openjpeg; \
-    wget -qO- https://github.com/uclouvain/openjpeg/archive/v$OPENJPEG_VERSION.tar.gz | tar xvz -C openjpeg --strip-components=1; cd openjpeg; mkdir build; cd build; \
-    cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX; \
-    make -j ${NPROC} install; \
-    cd ../..; rm -rf openjpeg
+# RUN \
+#     mkdir openjpeg; \
+#     wget -qO- https://github.com/uclouvain/openjpeg/archive/v$OPENJPEG_VERSION.tar.gz | tar xvz -C openjpeg --strip-components=1; cd openjpeg; mkdir build; cd build; \
+#     cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$PREFIX; \
+#     make -j ${NPROC} install; \
+#     cd ../..; rm -rf openjpeg
 
 # jpeg_turbo
-RUN \
-    mkdir jpeg; \
-    wget -qO- https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${LIBJPEG_TURBO_VERSION}.tar.gz | tar xvz -C jpeg --strip-components=1; cd jpeg; \
-    cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$PREFIX .; \
-    make -j $(nproc) install; \
-    cd ..; rm -rf jpeg
+# RUN \
+#     mkdir jpeg; \
+#     wget -qO- https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${LIBJPEG_TURBO_VERSION}.tar.gz | tar xvz -C jpeg --strip-components=1; cd jpeg; \
+#     cmake -G"Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$PREFIX .; \
+#     make -j $(nproc) install; \
+#     cd ..; rm -rf jpeg
 
 # geotiff
 RUN \
@@ -198,19 +198,28 @@ RUN \
         --disable-debug \
         --disable-static \
         --prefix=${PREFIX} \
-        --with-openjpeg \
-        --with-geotiff=${PREFIX} \
-        --with-hdf4=${PREFIX} \
-        --with-hdf5=${PREFIX} \
-        --with-netcdf=${PREFIX} \
-        --with-webp=${PREFIX} \
+        # --with-openjpeg \
+	--without-openjpeg \
+        # --with-geotiff=${PREFIX} \
+	--with-geotiff=internal \
+        # --with-hdf4=${PREFIX} \
+	-without-hdf4 \
+        # --with-hdf5=${PREFIX} \
+	-without-hdf5 \
+        # --with-netcdf=${PREFIX} \
+	--without-netcdf \
+        # --with-webp=${PREFIX} \
+	--without-webp \
         --with-zstd=${PREFIX} \
-        --with-jpeg=${PREFIX} \
+        # --with-jpeg=${PREFIX} \
+	--without-jpeg \
         --with-threads=yes \
         --with-sqlite3=$PREFIX \
+	# --without-sqlite3 \
         --with-curl=${PREFIX}/bin/curl-config \
         --without-python \
         --without-libtool \
+	--without-mysql \
         --disable-driver-elastic \
         --with-geos=$PREFIX/bin/geos-config \
         --with-hide-internal-symbols=yes \
